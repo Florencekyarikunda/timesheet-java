@@ -1,0 +1,78 @@
+
+/* 
+    Created on : Mar 2, 2022, 12:07:33 PM
+    Author     : HP
+*/
+
+
+body{
+      font  : 1.3rem sans-serif;
+      padding : 0.5em;
+      margin  : 0;
+
+}
+.form{
+    position : relative;
+    width  : 740px;
+    height : 400px;
+    margin : 0 auto;
+    padding: 1em;
+    box-sizing: border-box;
+}
+.container{
+/*    font-size: 30%;*/
+    width: 80%;
+    height: 70px;
+    font-family: sans-serif;
+    
+    
+    
+}
+
+label{
+    font-size: 15px;
+}
+
+.form-control{
+    height: 50px;
+    size: 30px;
+/*    background-color:lightsalmon;*/
+    
+}
+.all{
+    width: 90%;
+    font-style: normal;
+    font-family: sans-serif;
+}
+input, textarea{
+/*  width : 20px;*/
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding      : 5px;
+  font         : bold .6em sans-serif;
+  border       : 2px solid #333;
+  border-radius: 5px;
+  background   : none;
+  cursor       : pointer;
+}
+
+select{
+      display : inline-block;
+      position: relative;
+
+}
+
+placeholder {
+  color: blue;
+  font-size: 1.5em;
+}
+
+
+.btn {
+    background-color: green;
+    margin-top: 10px;
+}

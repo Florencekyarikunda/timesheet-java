@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="sidebar.css" />
+        <h:outputScript library="js" name="sidebar.js" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"></link>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css' rel='stylesheet'></link>
+    </h:head>
+    <h:body  class='snippet-body' id="body-pd">
+
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+            <div class="header_img"> <img src="https://res.cloudinary.com/kolynz-b/image/upload/v1638636909/ko.lynz_b_218871186_831566384142117_7643572219233961744_n_wcsj3e.jpg" alt=""/> </div>
+        </header>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div> <a href="#" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Timesheet 1.0.0</span> </a>
+                    <div class="nav_list"> <a href="/timesheets/faces/timesheet.xhtml" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span></a> <a href="/timesheets/faces/staff.xhtml" class="nav_link"><i class='bx bx-user nav_icon'></i> <span class="nav_name">Staff</span> </a> <a href="/timesheets/faces/mode.xhtml" class="nav_link"><i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Mode</span> </a>  <a href="/timesheets/faces/category.xhtml" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Category</span> </a> <a href="/timesheets/faces/entryForm.xhtml" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Entry Form</span></a> <a href="/timesheets/faces/status.xhtml" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Status</span> </a> </div>
+                </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+            </nav>
+        </div>
+        <h:form style="margin-top: 70px;">
+            <h1 class=' text-center'> Staff </h1>
+            <div class="col">
+                <div class="form-group">
+                    <h:inputText  class="form-control"   value="#{staff.firstName}" style="width: 70%"/>
+                </div> 
+                <div class="form-group">
+                    <h:inputText  class="form-control"   value="#{staff.lastName}" style="width: 70%"/>
+                </div> 
+                <h:commandButton type="submit" class="btn btn-primary  " value="Add" action="#{staffBean.createStaff(staff)}" style="margin-top: 5px" /> 
+                <p:growl id="growl1"/>
+                <!--</h:form>-->
+                <br></br>
+
+                <!--Container Main start-->
+                <div class="height-100 bg-light" style="margin-top: 20px">
+
+                    <!--table--> 
+                    <div class="container">
+
+                        <h:dataTable value="#{staffBean.staffList}" var="staff" class="table table-striped table-bordered Page navigation example" >
+                                <h:column >
+                                    <f:facet name="header"  >
+                                        Id
+                                    </f:facet>
+                                    <h:outputText value="#{staff.staff_id}" />
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header" >
+                                        First Name
+                                    </f:facet>
+                                    <h:outputText value="#{staff.firstName}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >
+                                        Last Name
+                                    </f:facet>
+                                    <h:outputText value="#{staff.lastName}" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header" >
+                                        Update
+                                    </f:facet>
+                                    <h:commandLink class="btn btn-primary" onclick="PF('editDialog').show()" value="Edit" action="#{staffBean.getStaff(staff.staff_id)}" style="margin-top: 5px">
+                                        <f:ajax event="click" listener="#{staffBean.getStaff(staff.staff_id)}" execute="@form" render="form:data" />
+                                    </h:commandLink>
+                                    <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@fat">Edit</button>-->
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header" >
+                                        Delete
+                                    </f:facet>
+                                    <h:commandButton class="btn btn-primary  " value="delete" action="#{staffBean.deleteStaff(staff)}" style="margin-top: 5px" />
+                                </h:column>
+
+                        </h:dataTable>
+                        <!--<h:form style="width: 70%">-->
+                        <p:dialog id="editModal" widgetVar="editDialog" width="500px" height="500px" position="center" modal="true" draggable="false" closable="true" resizable="false" showHeader="true">
+                            <h:panelGroup id="data" class="modal-dialog modal-dialog modal-xl" layout="block">
+                                <h:panelGroup rendered="#{staffBean.getStaff() != null}" layout="block">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--<h:form>-->
+                                            <div class="form-group col-md-6">
+                                                <label for="inputname"></label>
+                                                <h:inputText class="form-control" value="#{staffBean.staff.staff_id}" />
+                                                <!--<input type="name" class="form-control" id="inputname" placeholder="name"/>-->
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputname"></label>
+                                                <h:inputText class="form-control" value="#{staffBean.staff.firstName}" />
+                                                <!--<input type="name" class="form-control" id="inputname" placeholder="name"/>-->
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="inputname"></label>
+                                                <h:inputText class="form-control" value="#{staffBean.staff.lastName}" />
+                                                <!--<input type="name" class="form-control" id="inputname" placeholder="name"/>-->
+                                            </div>
+                                            <!--</h:form>-->
+                                        </div>  
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!--<button type="button" class="btn btn-secondary" >Close</button>-->
+                                        <h:commandButton type="button" class="btn btn-secondary" onclick="PF('editDialog').hide()" value="Close" />
+                                        <!--<button type="button" class="btn btn-secondary" >Edit</button>-->
+                                        <h:commandButton type="button" class="btn btn-secondary" value="Edit">                                     
+                                            <f:ajax event="click" listener="#{staffBean.updateStaff(staffBean.staff)}" execute="@form" render="form" />
+                                        </h:commandButton> 
+                                    </div>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </p:dialog>
+                        <!--</h:form>-->
+                    </div>
+                </div>
+                <!--delete confirmation modal-->
+                <!--<form>-->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Staff</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-danger" role="alert" >Are You Sure You Want To Delete This Entry</div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary">Cancel</button>
+                                <h:commandButton type="submit" class="btn btn-primary  " value="Delete" action="#{staffBean.deleteStaff(staff)}" style="margin-top: 5px" /> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--</form>-->
+                <!--Container Main end-->
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
